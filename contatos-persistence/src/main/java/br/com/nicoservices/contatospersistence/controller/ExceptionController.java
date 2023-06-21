@@ -11,7 +11,7 @@ public class ExceptionController {
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public String erro(){
+    public String exception(){
         return "exceptions/error";
     }
 }

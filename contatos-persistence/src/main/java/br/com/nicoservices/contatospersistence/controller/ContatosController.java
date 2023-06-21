@@ -51,7 +51,10 @@ public class ContatosController {
 
     @PostMapping("/editar/{id}")
     @Transactional
-    public String atualizar(@PathVariable Long id, @Valid EditarContatoRequest dadosAtualizados, BindingResult validationResult){
+    public String atualizar(@PathVariable Long id,
+                            @Valid EditarContatoRequest dadosAtualizados,
+                            BindingResult validationResult){
+
         if (validationResult.hasErrors()) return "formEditarContato";
         Contato contato = repository.findById(id).get();
         contato.atualizar(dadosAtualizados);
