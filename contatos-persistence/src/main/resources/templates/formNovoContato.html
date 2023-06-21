@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{base :: head}"></head>
+
+<body>
+    <div class="container">
+
+        <div th:replace="~{base :: header}"></div>
+
+        <div th:replace="~{base :: navbar}"></div>
+
+        <form th:object="${novoContatoRequest}" class="card card-body" action="/contatos/novo" method="post">
+            <div class="card-header">
+                Novo Contato
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="nome" class="mb-1">Nome:</label>
+                    <input th:field="*{nome}" th:errorclass="is-invalid" class="form-control" placeholder="Digite o nome do contato aqui...">
+                    <div class="invalid-feedback" th:error="*{nome}">Obrigatório</div>
+                </div>
+    
+                <div class="form-group">
+                    <label for="email" class="mb-1">Email:</label>
+                    <input th:field="*{email}" th:errorclass="is-invalid" class="form-control" placeholder="Digite o email do contato aqui...">
+                    <div class="invalid-feedback" th:error="*{email}">Email inválido!</div>
+                </div>
+    
+                <div class="form-group">
+                    <label for="telefone1" class="mb-1">Telefone 1:</label>
+                    <input th:field="*{telefone1}" th:errorclass="is-invalid" class="form-control" placeholder="Digite o telefone 1 do contato aqui...">
+                    <div class="invalid-feedback" th:error="*{telefone1}">Obrigatório, 9 ou 12 (com DDD) ou 14 (código do país + DDD) dígitos numéricos!</div>
+                </div>
+    
+                <div class="form-group">
+                    <label for="telefone2" class="mb-1">Telefone 2:</label>
+                    <input th:field="*{telefone2}" th:errorclass="is-invalid" class="form-control" placeholder="Digite o telefone 2 do contato aqui...">
+                    <div class="invalid-feedback" th:error="*{telefone2}">Obrigatório, 9 ou 12 (com DDD) ou 14 (código do país + DDD) dígitos numéricos!</div>
+                </div>
+    
+                <button class="btn btn-primary mt-3" type="submit">Cadastrar</button>
+            </div>
+        </form>
+
+    </div>
+</body>
+
+</html>
