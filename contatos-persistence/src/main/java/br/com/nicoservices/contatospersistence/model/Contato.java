@@ -1,7 +1,7 @@
 package br.com.nicoservices.contatospersistence.model;
 
-import br.com.nicoservices.contatospersistence.dto.EditarContatoRequest;
-import br.com.nicoservices.contatospersistence.dto.NovoContatoRequest;
+import br.com.nicoservices.contatospersistence.dto.DadosEditarContato;
+import br.com.nicoservices.contatospersistence.dto.DadosNovoContato;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,7 +15,6 @@ import lombok.*;
 @EqualsAndHashCode(of = "id")
 public class Contato implements Comparable<Contato> {
 
-
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
@@ -23,18 +22,19 @@ public class Contato implements Comparable<Contato> {
     private String telefone1;
     private String telefone2;
 
-    public Contato(NovoContatoRequest dadosNovoContato) {
-        this.nome = dadosNovoContato.getNome();
-        this.email = dadosNovoContato.getEmail();
-        this.telefone1 = dadosNovoContato.getTelefone1();
-        this.telefone2 = dadosNovoContato.getTelefone2();
+    public Contato(DadosNovoContato dadosNovoContato) {
+        this.nome = dadosNovoContato.nome();
+        this.email = dadosNovoContato.email();
+        this.telefone1 = dadosNovoContato.telefone1();
+        this.telefone2 = dadosNovoContato.telefone2();
     }
 
-    public void atualizar(EditarContatoRequest contatoAtualizado) {
-        this.nome = contatoAtualizado.getNome();
-        this.email = contatoAtualizado.getEmail();
-        this.telefone1 = contatoAtualizado.getTelefone1();
-        this.telefone2 = contatoAtualizado.getTelefone2();
+    public Contato(DadosEditarContato dadosContatoAtualizado) {
+        this.id = dadosContatoAtualizado.id();
+        this.nome = dadosContatoAtualizado.nome();
+        this.email = dadosContatoAtualizado.email();
+        this.telefone1 = dadosContatoAtualizado.telefone1();
+        this.telefone2 = dadosContatoAtualizado.telefone2();
     }
 
     public void formatarTelefones() {
@@ -49,6 +49,10 @@ public class Contato implements Comparable<Contato> {
             case 14 -> ('+' + telefone.substring(0, 2) + " (" + telefone.substring(2, 5) + ") " + telefone.substring(5, 10) + '-' + telefone.substring(10, 14));
             default -> telefone;
         };
+    }
+
+    public DadosEditarContato toDadosEditarContato() {
+        return new DadosEditarContato(this.id, this.nome, this.email, this.telefone1, this.telefone2);
     }
 
     @Override
