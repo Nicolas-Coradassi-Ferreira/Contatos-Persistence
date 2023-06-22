@@ -1,4 +1,4 @@
-package br.com.nicoservices.contatospersistence.model.contato;
+package br.com.nicoservices.contatospersistence.dto;
 
 import jakarta.validation.constraints.*;
 import lombok.Getter;

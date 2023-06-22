@@ -1,5 +1,6 @@
-package br.com.nicoservices.contatospersistence.model.contato;
+package br.com.nicoservices.contatospersistence.dto;
 
+import br.com.nicoservices.contatospersistence.model.Contato;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

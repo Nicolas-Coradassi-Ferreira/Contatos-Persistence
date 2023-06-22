@@ -1,5 +1,7 @@
-package br.com.nicoservices.contatospersistence.model.contato;
+package br.com.nicoservices.contatospersistence.model;
 
+import br.com.nicoservices.contatospersistence.dto.EditarContatoRequest;
+import br.com.nicoservices.contatospersistence.dto.NovoContatoRequest;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,6 +14,7 @@ import lombok.*;
 @Setter
 @EqualsAndHashCode(of = "id")
 public class Contato implements Comparable<Contato> {
+
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

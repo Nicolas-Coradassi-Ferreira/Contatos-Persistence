@@ -10,7 +10,7 @@
 
         <div th:replace="~{base :: navbar}"></div>
 
-        <form th:object="${novoContatoRequest}" class="card card-body" action="/contatos/novo" method="post">
+        <form th:object="${novoContatoRequest}" class="card card-body" th:action="'/contatos/novo'" method="post">
             <div class="card-header">
                 Novo Contato
             </div>

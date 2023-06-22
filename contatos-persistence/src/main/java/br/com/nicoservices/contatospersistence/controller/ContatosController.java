@@ -1,9 +1,9 @@
 package br.com.nicoservices.contatospersistence.controller;
 
-import br.com.nicoservices.contatospersistence.model.contato.Contato;
+import br.com.nicoservices.contatospersistence.model.Contato;
 import br.com.nicoservices.contatospersistence.jpa.ContatoRepository;
-import br.com.nicoservices.contatospersistence.model.contato.EditarContatoRequest;
-import br.com.nicoservices.contatospersistence.model.contato.NovoContatoRequest;
+import br.com.nicoservices.contatospersistence.dto.EditarContatoRequest;
+import br.com.nicoservices.contatospersistence.dto.NovoContatoRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
