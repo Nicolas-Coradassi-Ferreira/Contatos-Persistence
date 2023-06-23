@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ModelAndView contatoNaoEncontrado(Exception ex){
+    public ModelAndView contatoNaoEncontrado(){
         return new ModelAndView("exceptions/exception")
                 .addObject("exceptionMessage", "Não foi possível encontrar o contato!");
     }

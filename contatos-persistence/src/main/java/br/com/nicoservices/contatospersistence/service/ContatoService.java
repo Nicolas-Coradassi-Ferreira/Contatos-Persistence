@@ -14,13 +14,8 @@ import java.util.List;
 @Service
 public class ContatoService {
 
-    private final ContatoRepository repository;
-
-
     @Autowired
-    public ContatoService(ContatoRepository repository) {
-        this.repository = repository;
-    }
+    private ContatoRepository repository;
 
 
     public List<Contato> buscarTodos() {
@@ -34,24 +29,23 @@ public class ContatoService {
     }
 
     public void salvar(DadosEditarContato dadosContatoAtualizado) {
-        if (contatoExistePorId(dadosContatoAtualizado.id()))
-            repository.save(new Contato(dadosContatoAtualizado));
-        else throw new EntityNotFoundException();
+        if (repository.existsById(dadosContatoAtualizado.id())) {
+            var contato = new Contato(dadosContatoAtualizado);
+            repository.save(contato);
+            return;
+        }
+        throw new EntityNotFoundException();
     }
 
     public void excluirPorId(Long id) {
         repository.deleteById(id);
     }
 
-    public Contato buscarReferenciaPorId(Long id) {
-        if (contatoExistePorId(id))
-            return repository.getReferenceById(id);
-        else throw new EntityNotFoundException();
-    }
-
-    private Boolean contatoExistePorId(Long id) {
+    public Contato buscarPorId(Long id) {
         var contato = repository.findById(id);
-        if (contato.isPresent()) return Boolean.TRUE;
-        else return Boolean.FALSE;
+        if (contato.isPresent()) {
+            return contato.get();
+        }
+        throw new EntityNotFoundException();
     }
 }

@@ -19,7 +19,7 @@ public class CustomErrorController implements ErrorController {
         var status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 
         if (status != null) {
-            int codigoStatus = Integer.parseInt(status.toString());
+            var codigoStatus = Integer.parseInt(status.toString());
 
             if (codigoStatus == HttpStatus.NOT_FOUND.value()){
                 mv.addObject("exceptionMessage",
@@ -33,9 +33,8 @@ public class CustomErrorController implements ErrorController {
                 return mv;
             }
 
-        } else return mv.addObject("exceptionMessage", "Erro não tratado!");
+        }
 
-
-
+        return mv.addObject("exceptionMessage", "Erro não tratado!");
     }
 }

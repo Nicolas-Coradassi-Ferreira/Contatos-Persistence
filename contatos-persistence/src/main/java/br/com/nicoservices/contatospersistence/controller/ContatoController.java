@@ -15,17 +15,14 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/contatos")
 public class ContatoController {
 
-    private final ContatoService service;
-
     @Autowired
-    public ContatoController(ContatoService service){
-        this.service = service;
-    }
+    private ContatoService service;
 
     @GetMapping
     public ModelAndView index() {
         var contatos = service.buscarTodos();
-        return new ModelAndView("index").addObject("contatos", contatos);
+        return new ModelAndView("index")
+                .addObject("contatos", contatos);
     }
 
     @GetMapping("/novo")
@@ -36,21 +33,26 @@ public class ContatoController {
     @PostMapping("/cadastrar")
     @Transactional
     public String cadastrar(@Valid DadosNovoContato dadosContato, BindingResult validationResult) {
-        if (validationResult.hasErrors()) return "contato/formNovoContato";
+        if (validationResult.hasErrors()) {
+            return "contato/formNovoContato";
+        }
         service.salvar(dadosContato);
         return "redirect:/contatos";
     }
 
     @GetMapping("/editar/{id}")
     public ModelAndView editar(@PathVariable Long id) {
-        var contato = service.buscarReferenciaPorId(id);
-        return new ModelAndView("contato/formEditarContato").addObject(contato.toDadosEditarContato());
+        var contato = service.buscarPorId(id);
+        return new ModelAndView("contato/formEditarContato")
+                .addObject(contato.toDadosEditarContato());
     }
 
     @PostMapping("/atualizar")
     @Transactional
     public String atualizar(@Valid DadosEditarContato dadosAtualizados, BindingResult validationResult) {
-        if (validationResult.hasErrors()) return "contato/formEditarContato";
+        if (validationResult.hasErrors()) {
+            return "contato/formEditarContato";
+        }
         service.salvar(dadosAtualizados);
         return "redirect:/contatos";
     }
