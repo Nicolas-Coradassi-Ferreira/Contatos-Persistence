@@ -30,13 +30,13 @@ public class ContatoController {
 
     @GetMapping("/novo")
     public String novo(DadosNovoContato dadosNovoContato) {
-        return "formNovoContato";
+        return "contato/formNovoContato";
     }
 
     @PostMapping("/cadastrar")
     @Transactional
     public String cadastrar(@Valid DadosNovoContato dadosContato, BindingResult validationResult) {
-        if (validationResult.hasErrors()) return "formNovoContato";
+        if (validationResult.hasErrors()) return "contato/formNovoContato";
         service.salvar(dadosContato);
         return "redirect:/contatos";
     }
@@ -44,13 +44,13 @@ public class ContatoController {
     @GetMapping("/editar/{id}")
     public ModelAndView editar(@PathVariable Long id) {
         var contato = service.buscarReferenciaPorId(id);
-        return new ModelAndView("formEditarContato").addObject(contato.toDadosEditarContato());
+        return new ModelAndView("contato/formEditarContato").addObject(contato.toDadosEditarContato());
     }
 
     @PostMapping("/atualizar")
     @Transactional
     public String atualizar(@Valid DadosEditarContato dadosAtualizados, BindingResult validationResult) {
-        if (validationResult.hasErrors()) return "formEditarContato";
+        if (validationResult.hasErrors()) return "contato/formEditarContato";
         service.salvar(dadosAtualizados);
         return "redirect:/contatos";
     }

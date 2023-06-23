@@ -36,7 +36,7 @@ public class ContatoService {
     public void salvar(DadosEditarContato dadosContatoAtualizado) {
         if (contatoExistePorId(dadosContatoAtualizado.id()))
             repository.save(new Contato(dadosContatoAtualizado));
-        else throw new EntityNotFoundException("Não foi possível encontrar o contato específicado!");
+        else throw new EntityNotFoundException();
     }
 
     public void excluirPorId(Long id) {
@@ -44,7 +44,9 @@ public class ContatoService {
     }
 
     public Contato buscarReferenciaPorId(Long id) {
-        return repository.getReferenceById(id);
+        if (contatoExistePorId(id))
+            return repository.getReferenceById(id);
+        else throw new EntityNotFoundException();
     }
 
     private Boolean contatoExistePorId(Long id) {
