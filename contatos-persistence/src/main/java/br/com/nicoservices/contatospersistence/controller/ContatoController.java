@@ -1,7 +1,6 @@
 package br.com.nicoservices.contatospersistence.controller;
 
 import br.com.nicoservices.contatospersistence.dto.DadosNovoContato;
-import br.com.nicoservices.contatospersistence.model.Contato;
 import br.com.nicoservices.contatospersistence.dto.DadosEditarContato;
 import br.com.nicoservices.contatospersistence.service.ContatoService;
 import jakarta.validation.Valid;
@@ -16,8 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/contatos")
 public class ContatoController {
 
+    private final ContatoService service;
+
     @Autowired
-    private ContatoService service;
+    public ContatoController(ContatoService service){
+        this.service = service;
+    }
 
     @GetMapping
     public ModelAndView index() {
@@ -30,11 +33,11 @@ public class ContatoController {
         return "formNovoContato";
     }
 
-    @PostMapping("/novo")
+    @PostMapping("/cadastrar")
     @Transactional
-    public String cadastrar(@Valid DadosNovoContato dadosNovoContato, BindingResult validationResult) {
+    public String cadastrar(@Valid DadosNovoContato dadosContato, BindingResult validationResult) {
         if (validationResult.hasErrors()) return "formNovoContato";
-        service.salvar(dadosNovoContato);
+        service.salvar(dadosContato);
         return "redirect:/contatos";
     }
 
@@ -46,9 +49,9 @@ public class ContatoController {
 
     @PostMapping("/atualizar")
     @Transactional
-    public String atualizar(@Valid DadosEditarContato dadosContatoAtualizado, BindingResult validationResult) {
+    public String atualizar(@Valid DadosEditarContato dadosAtualizados, BindingResult validationResult) {
         if (validationResult.hasErrors()) return "formEditarContato";
-        service.salvar(dadosContatoAtualizado);
+        service.salvar(dadosAtualizados);
         return "redirect:/contatos";
     }
 

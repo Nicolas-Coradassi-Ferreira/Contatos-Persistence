@@ -1,8 +1,6 @@
 package br.com.nicoservices.contatospersistence.dto;
 
 import jakarta.validation.constraints.*;
-import lombok.Getter;
-import lombok.Setter;
 
 public record DadosNovoContato (
         @NotNull

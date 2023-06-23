@@ -4,6 +4,7 @@ import br.com.nicoservices.contatospersistence.dto.DadosEditarContato;
 import br.com.nicoservices.contatospersistence.dto.DadosNovoContato;
 import br.com.nicoservices.contatospersistence.jpa.ContatoRepository;
 import br.com.nicoservices.contatospersistence.model.Contato;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +14,17 @@ import java.util.List;
 @Service
 public class ContatoService {
 
+    private final ContatoRepository repository;
+
+
     @Autowired
-    private ContatoRepository repository;
+    public ContatoService(ContatoRepository repository) {
+        this.repository = repository;
+    }
+
 
     public List<Contato> buscarTodos() {
         var contatos = repository.findAll();
-        contatos.forEach(Contato::formatarTelefones);
         Collections.sort(contatos);
         return contatos;
     }
@@ -28,7 +34,9 @@ public class ContatoService {
     }
 
     public void salvar(DadosEditarContato dadosContatoAtualizado) {
-        repository.save(new Contato(dadosContatoAtualizado));
+        if (contatoExistePorId(dadosContatoAtualizado.id()))
+            repository.save(new Contato(dadosContatoAtualizado));
+        else throw new EntityNotFoundException("Não foi possível encontrar o contato específicado!");
     }
 
     public void excluirPorId(Long id) {
@@ -37,5 +45,11 @@ public class ContatoService {
 
     public Contato buscarReferenciaPorId(Long id) {
         return repository.getReferenceById(id);
+    }
+
+    private Boolean contatoExistePorId(Long id) {
+        var contato = repository.findById(id);
+        if (contato.isPresent()) return Boolean.TRUE;
+        else return Boolean.FALSE;
     }
 }
