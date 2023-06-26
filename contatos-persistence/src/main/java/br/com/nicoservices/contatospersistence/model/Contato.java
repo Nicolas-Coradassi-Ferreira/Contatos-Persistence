@@ -2,7 +2,7 @@ package br.com.nicoservices.contatospersistence.model;
 
 import br.com.nicoservices.contatospersistence.dto.DadosEditarContato;
 import br.com.nicoservices.contatospersistence.dto.DadosNovoContato;
-import br.com.nicoservices.contatospersistence.util.TelefoneUtils;
+import br.com.nicoservices.contatospersistence.util.TelefoneUtil;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,26 +25,25 @@ public class Contato implements Comparable<Contato> {
     public Contato(DadosNovoContato dadosNovoContato) {
         this.nome = dadosNovoContato.nome();
         this.email = dadosNovoContato.email();
-        this.telefone1 = TelefoneUtils.formatar(dadosNovoContato.telefone1());
-        this.telefone2 = TelefoneUtils.formatar(dadosNovoContato.telefone2());
+        this.telefone1 = TelefoneUtil.formatar(dadosNovoContato.telefone1());
+        this.telefone2 = TelefoneUtil.formatar(dadosNovoContato.telefone2());
     }
 
-    public Contato(DadosEditarContato dadosContatoAtualizado) {
-        this.id = dadosContatoAtualizado.id();
-        this.nome = dadosContatoAtualizado.nome();
-        this.email = dadosContatoAtualizado.email();
-        this.telefone1 = TelefoneUtils.formatar(dadosContatoAtualizado.telefone1());
-        this.telefone2 = TelefoneUtils.formatar(dadosContatoAtualizado.telefone2());
-    }
 
+    public void atualizarDados(DadosEditarContato dadosAtualizados){
+        this.nome = dadosAtualizados.nome();
+        this.email = dadosAtualizados.email();
+        this.telefone1 = TelefoneUtil.formatar(dadosAtualizados.telefone1());
+        this.telefone2 = TelefoneUtil.formatar(dadosAtualizados.telefone2());
+    }
 
     public DadosEditarContato toDadosEditarContato() {
         return new DadosEditarContato(
                 this.id,
                 this.nome,
                 this.email,
-                TelefoneUtils.desformatar(this.telefone1),
-                TelefoneUtils.desformatar(this.telefone2));
+                TelefoneUtil.desformatar(this.telefone1),
+                TelefoneUtil.desformatar(this.telefone2));
     }
 
     @Override

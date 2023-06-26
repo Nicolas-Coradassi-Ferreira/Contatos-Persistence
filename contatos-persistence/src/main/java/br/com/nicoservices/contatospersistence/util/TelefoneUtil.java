@@ -1,8 +1,8 @@
 package br.com.nicoservices.contatospersistence.util;
 
-public class TelefoneUtils {
+public class TelefoneUtil {
 
-    private TelefoneUtils(){}
+    private TelefoneUtil(){}
 
 
     public static String desformatar(String telefone){

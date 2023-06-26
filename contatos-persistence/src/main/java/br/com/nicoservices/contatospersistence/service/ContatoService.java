@@ -2,7 +2,7 @@ package br.com.nicoservices.contatospersistence.service;
 
 import br.com.nicoservices.contatospersistence.dto.DadosEditarContato;
 import br.com.nicoservices.contatospersistence.dto.DadosNovoContato;
-import br.com.nicoservices.contatospersistence.jpa.ContatoRepository;
+import br.com.nicoservices.contatospersistence.repository.ContatoRepository;
 import br.com.nicoservices.contatospersistence.model.Contato;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +28,9 @@ public class ContatoService {
         repository.save(new Contato(dadosNovoContato));
     }
 
-    public void salvar(DadosEditarContato dadosContatoAtualizado) {
-        if (repository.existsById(dadosContatoAtualizado.id())) {
-            var contato = new Contato(dadosContatoAtualizado);
-            repository.save(contato);
-            return;
-        }
-        throw new EntityNotFoundException();
+    public void salvar(DadosEditarContato dadosAtualizados) {
+        var contato = buscarPorId(dadosAtualizados.id());
+        contato.atualizarDados(dadosAtualizados);
     }
 
     public void excluirPorId(Long id) {
@@ -42,10 +38,8 @@ public class ContatoService {
     }
 
     public Contato buscarPorId(Long id) {
-        var contato = repository.findById(id);
-        if (contato.isPresent()) {
-            return contato.get();
-        }
-        throw new EntityNotFoundException();
+        return repository
+                .findById(id)
+                .orElseThrow(EntityNotFoundException::new);
     }
 }

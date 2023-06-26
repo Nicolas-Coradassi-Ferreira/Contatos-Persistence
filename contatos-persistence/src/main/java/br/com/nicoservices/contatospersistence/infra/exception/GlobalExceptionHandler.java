@@ -1,4 +1,4 @@
-package br.com.nicoservices.contatospersistence.controller;
+package br.com.nicoservices.contatospersistence.infra.exception;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;

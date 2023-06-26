@@ -14,7 +14,7 @@ public class CustomErrorController implements ErrorController {
     @RequestMapping("/error")
     public ModelAndView handleError(HttpServletRequest request){
 
-        ModelAndView mv = new ModelAndView("exceptions/exception");
+        var mv = new ModelAndView("exceptions/exception");
 
         var status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 
