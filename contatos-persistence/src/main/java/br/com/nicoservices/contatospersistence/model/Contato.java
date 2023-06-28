@@ -1,7 +1,7 @@
 package br.com.nicoservices.contatospersistence.model;
 
-import br.com.nicoservices.contatospersistence.dto.DadosEditarContato;
-import br.com.nicoservices.contatospersistence.dto.DadosNovoContato;
+import br.com.nicoservices.contatospersistence.dto.EditarContatoRequest;
+import br.com.nicoservices.contatospersistence.dto.NovoContatoRequest;
 import br.com.nicoservices.contatospersistence.util.TelefoneUtil;
 import jakarta.persistence.*;
 import lombok.*;
@@ -22,23 +22,23 @@ public class Contato implements Comparable<Contato> {
     private String telefone2;
 
 
-    public Contato(DadosNovoContato dadosNovoContato) {
-        this.nome = dadosNovoContato.nome();
-        this.email = dadosNovoContato.email();
-        this.telefone1 = TelefoneUtil.formatar(dadosNovoContato.telefone1());
-        this.telefone2 = TelefoneUtil.formatar(dadosNovoContato.telefone2());
+    public Contato(NovoContatoRequest novoContatoRequest) {
+        this.nome = novoContatoRequest.nome();
+        this.email = novoContatoRequest.email();
+        this.telefone1 = TelefoneUtil.formatar(novoContatoRequest.telefone1());
+        this.telefone2 = TelefoneUtil.formatar(novoContatoRequest.telefone2());
     }
 
 
-    public void atualizarDados(DadosEditarContato dadosAtualizados){
+    public void atualizarDados(EditarContatoRequest dadosAtualizados){
         this.nome = dadosAtualizados.nome();
         this.email = dadosAtualizados.email();
         this.telefone1 = TelefoneUtil.formatar(dadosAtualizados.telefone1());
         this.telefone2 = TelefoneUtil.formatar(dadosAtualizados.telefone2());
     }
 
-    public DadosEditarContato toDadosEditarContato() {
-        return new DadosEditarContato(
+    public EditarContatoRequest toDadosEditarContato() {
+        return new EditarContatoRequest(
                 this.id,
                 this.nome,
                 this.email,

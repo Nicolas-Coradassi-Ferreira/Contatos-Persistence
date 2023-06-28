@@ -1,7 +1,7 @@
 package br.com.nicoservices.contatospersistence.controller;
 
-import br.com.nicoservices.contatospersistence.dto.DadosNovoContato;
-import br.com.nicoservices.contatospersistence.dto.DadosEditarContato;
+import br.com.nicoservices.contatospersistence.dto.NovoContatoRequest;
+import br.com.nicoservices.contatospersistence.dto.EditarContatoRequest;
 import br.com.nicoservices.contatospersistence.service.ContatoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +26,13 @@ public class ContatoController {
     }
 
     @GetMapping("/novo")
-    public String novo(DadosNovoContato dadosNovoContato) {
+    public String novo(NovoContatoRequest novoContatoRequest) {
         return "contato/formNovoContato";
     }
 
     @PostMapping("/cadastrar")
     @Transactional
-    public String cadastrar(@Valid DadosNovoContato dadosContato, BindingResult validationResult) {
+    public String cadastrar(@Valid NovoContatoRequest dadosContato, BindingResult validationResult) {
         if (validationResult.hasErrors()) {
             return "contato/formNovoContato";
         }
@@ -49,7 +49,7 @@ public class ContatoController {
 
     @PostMapping("/atualizar")
     @Transactional
-    public String atualizar(@Valid DadosEditarContato dadosAtualizados, BindingResult validationResult) {
+    public String atualizar(@Valid EditarContatoRequest dadosAtualizados, BindingResult validationResult) {
         if (validationResult.hasErrors()) {
             return "contato/formEditarContato";
         }

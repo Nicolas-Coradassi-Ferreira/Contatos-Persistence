@@ -1,7 +1,7 @@
 package br.com.nicoservices.contatospersistence.service;
 
-import br.com.nicoservices.contatospersistence.dto.DadosEditarContato;
-import br.com.nicoservices.contatospersistence.dto.DadosNovoContato;
+import br.com.nicoservices.contatospersistence.dto.EditarContatoRequest;
+import br.com.nicoservices.contatospersistence.dto.NovoContatoRequest;
 import br.com.nicoservices.contatospersistence.repository.ContatoRepository;
 import br.com.nicoservices.contatospersistence.model.Contato;
 import jakarta.persistence.EntityNotFoundException;
@@ -24,11 +24,11 @@ public class ContatoService {
         return contatos;
     }
 
-    public void salvar(DadosNovoContato dadosNovoContato) {
-        repository.save(new Contato(dadosNovoContato));
+    public void salvar(NovoContatoRequest novoContatoRequest) {
+        repository.save(new Contato(novoContatoRequest));
     }
 
-    public void salvar(DadosEditarContato dadosAtualizados) {
+    public void salvar(EditarContatoRequest dadosAtualizados) {
         var contato = buscarPorId(dadosAtualizados.id());
         contato.atualizarDados(dadosAtualizados);
     }

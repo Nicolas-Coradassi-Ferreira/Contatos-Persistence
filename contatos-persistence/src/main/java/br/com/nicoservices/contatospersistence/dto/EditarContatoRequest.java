@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 
-public record DadosEditarContato(
+public record EditarContatoRequest(
         @NotNull
         Long id,
         @NotNull

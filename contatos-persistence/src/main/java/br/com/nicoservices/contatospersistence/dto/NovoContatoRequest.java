@@ -2,7 +2,7 @@ package br.com.nicoservices.contatospersistence.dto;
 
 import jakarta.validation.constraints.*;
 
-public record DadosNovoContato (
+public record NovoContatoRequest(
         @NotNull
         @NotBlank
         String nome,
