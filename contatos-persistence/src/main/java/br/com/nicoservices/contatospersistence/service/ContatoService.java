@@ -2,6 +2,7 @@ package br.com.nicoservices.contatospersistence.service;
 
 import br.com.nicoservices.contatospersistence.dto.EditarContatoRequest;
 import br.com.nicoservices.contatospersistence.dto.NovoContatoRequest;
+import br.com.nicoservices.contatospersistence.exception.ApplicationException;
 import br.com.nicoservices.contatospersistence.repository.ContatoRepository;
 import br.com.nicoservices.contatospersistence.model.Contato;
 import jakarta.persistence.EntityNotFoundException;
@@ -40,6 +41,6 @@ public class ContatoService {
     public Contato buscarPorId(Long id) {
         return repository
                 .findById(id)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new ApplicationException("Não foi possível encontrar o contato parametrizado!"));
     }
 }
