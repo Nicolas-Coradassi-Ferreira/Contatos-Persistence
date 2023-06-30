@@ -1,14 +1,17 @@
 package br.com.nicoservices.contatospersistence.controller;
 
-import br.com.nicoservices.contatospersistence.dto.NovoContatoRequest;
+
 import br.com.nicoservices.contatospersistence.dto.EditarContatoRequest;
+import br.com.nicoservices.contatospersistence.dto.NovoContatoRequest;
 import br.com.nicoservices.contatospersistence.service.ContatoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -18,6 +21,7 @@ public class ContatoController {
     @Autowired
     private ContatoService service;
 
+
     @GetMapping
     public ModelAndView index() {
         var contatos = service.buscarTodos();
@@ -26,43 +30,40 @@ public class ContatoController {
     }
 
     @GetMapping("/novo")
-    public String novo(NovoContatoRequest novoContatoRequest) {
-        return "contato/formNovoContato";
+    public String novo(NovoContatoRequest novoContatoRequest){
+        return "formNovoContato";
     }
 
     @PostMapping("/cadastrar")
-    @Transactional
-    public String cadastrar(@Valid NovoContatoRequest dadosContato, BindingResult validationResult) {
-        if (validationResult.hasErrors()) {
-            return "contato/formNovoContato";
+    public String cadastrar(@Valid NovoContatoRequest novoContatoRequest, BindingResult validationResult){
+        if (validationResult.hasErrors()){
+            return "formNovoContato";
         }
-        service.salvar(dadosContato);
+        service.cadastrar(novoContatoRequest);
         return "redirect:/contatos";
     }
 
     @GetMapping("/editar/{id}")
-    public ModelAndView editar(@PathVariable Long id) {
+    public ModelAndView editar(@PathVariable Long id){
         var contato = service.buscarPorId(id);
-        return new ModelAndView("contato/formEditarContato")
-                .addObject(contato.toDadosEditarContato());
+        return new ModelAndView("formEditarContato")
+                .addObject("editarContatoRequest", contato.toEditarContatoRequest());
     }
 
     @PostMapping("/atualizar")
-    @Transactional
-    public String atualizar(@Valid EditarContatoRequest dadosAtualizados, BindingResult validationResult) {
-        if (validationResult.hasErrors()) {
-            return "contato/formEditarContato";
+    public String atualizar(@Valid EditarContatoRequest editarContatoRequest, BindingResult validationResult){
+        if (validationResult.hasErrors()){
+            return "formEditarContato";
         }
-        service.salvar(dadosAtualizados);
+        var contato = service.buscarPorId(editarContatoRequest.id());
+        contato.atualizarDados(editarContatoRequest);
         return "redirect:/contatos";
     }
 
     @PostMapping("/excluir/{id}")
-    @Transactional
-    public String excluir(@PathVariable Long id) {
+    public String excluir(@PathVariable Long id){
         service.excluirPorId(id);
         return "redirect:/contatos";
     }
-
 
 }

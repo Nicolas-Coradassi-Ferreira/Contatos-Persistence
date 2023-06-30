@@ -1,10 +1,9 @@
 package br.com.nicoservices.contatospersistence.dto;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 
+import java.time.LocalDate;
 
 public record EditarContatoRequest(
         @NotNull
@@ -14,10 +13,13 @@ public record EditarContatoRequest(
         String nome,
         @NotNull
         @NotBlank
-        @Email
-        String email,
-        @Pattern(regexp = "^([0-9]{9}|[0-9]{12}|[0-9]{14})$")
-        String telefone1,
-        @Pattern(regexp = "^(|[0-9]{9}|[0-9]{12}|[0-9]{14})$")
-        String telefone2
-) {}
+        String sobrenome,
+        @NotNull
+        LocalDate dataNascimento,
+
+        //List<Telefone> telefones
+        @NotNull
+        @NotBlank
+        String grauParentesco
+) {
+}
