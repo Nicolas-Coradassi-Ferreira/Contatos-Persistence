@@ -20,15 +20,16 @@ public class Contato implements Comparable<Contato> {
     private String sobrenome;
     @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
-//    private List<Telefone> telefones;
+    private String telefones;
     @Column(name = "grau_parentesco")
     private String grauParentesco;
+
 
     public Contato(NovoContatoRequest dadosNovoContato) {
         this.nome = dadosNovoContato.nome();
         this.sobrenome = dadosNovoContato.sobrenome();
         this.dataNascimento = dadosNovoContato.dataNascimento();
-        //telefones
+        this.telefones = dadosNovoContato.telefones();
         this.grauParentesco = dadosNovoContato.grauParentesco();
     }
 
@@ -37,7 +38,7 @@ public class Contato implements Comparable<Contato> {
         this.nome = dadosContatoAtualizados.nome();
         this.sobrenome = dadosContatoAtualizados.sobrenome();
         this.dataNascimento = dadosContatoAtualizados.dataNascimento();
-        //telefones
+        this.telefones = dadosContatoAtualizados.telefones();
         this.grauParentesco = dadosContatoAtualizados.grauParentesco();
     }
 
@@ -47,7 +48,7 @@ public class Contato implements Comparable<Contato> {
                 this.nome,
                 this.sobrenome,
                 this.dataNascimento,
-                //telefones
+                this.telefones,
                 this.grauParentesco
         );
     }

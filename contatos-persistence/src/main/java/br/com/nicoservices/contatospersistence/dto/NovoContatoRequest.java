@@ -14,8 +14,9 @@ public record NovoContatoRequest(
         String sobrenome,
         @NotNull
         LocalDate dataNascimento,
-
-//        List<Telefone> telefones
+        @NotNull
+        @NotBlank
+        String telefones,
         @NotNull
         @NotBlank
         String grauParentesco
