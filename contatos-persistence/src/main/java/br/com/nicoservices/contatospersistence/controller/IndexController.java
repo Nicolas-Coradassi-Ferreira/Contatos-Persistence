@@ -8,6 +8,6 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(){
-        return "redirect:/contatos";
+        return "redirect:/contatos/consultar";
     }
 }

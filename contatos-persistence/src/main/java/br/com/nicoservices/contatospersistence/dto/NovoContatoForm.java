@@ -5,9 +5,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
-public record EditarContatoRequest(
-        @NotNull
-        Long id,
+public record NovoContatoForm(
         @NotNull
         @NotBlank
         String nome,
@@ -20,7 +18,5 @@ public record EditarContatoRequest(
         @NotBlank
         String telefones,
         @NotNull
-        @NotBlank
         String grauParentesco
-) {
-}
+) {}

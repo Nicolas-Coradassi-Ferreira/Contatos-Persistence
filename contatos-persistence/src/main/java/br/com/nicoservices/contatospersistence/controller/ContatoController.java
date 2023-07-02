@@ -1,8 +1,8 @@
 package br.com.nicoservices.contatospersistence.controller;
 
 
-import br.com.nicoservices.contatospersistence.dto.EditarContatoRequest;
-import br.com.nicoservices.contatospersistence.dto.NovoContatoRequest;
+import br.com.nicoservices.contatospersistence.dto.EditarContatoForm;
+import br.com.nicoservices.contatospersistence.dto.NovoContatoForm;
 import br.com.nicoservices.contatospersistence.service.ContatoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,48 +23,48 @@ public class ContatoController {
     private ContatoService service;
 
 
-    @GetMapping
-    public ModelAndView index() {
+    @GetMapping("/{evento}")
+    public ModelAndView index(@PathVariable String evento) {
         var contatos = service.buscarTodos();
         return new ModelAndView("index")
-                .addObject("contatos", contatos);
+                .addObject("contatos", contatos)
+                .addObject("evento", evento);
     }
 
     @GetMapping("/novo")
-    public String novo(NovoContatoRequest novoContatoRequest){
-        return "formNovoContato";
+    public String novo(NovoContatoForm novoContatoForm){
+        return "contato/formNovoContato";
     }
 
     @PostMapping("/cadastrar")
-    public String cadastrar(@Valid NovoContatoRequest novoContatoRequest, BindingResult validationResult){
+    public String cadastrar(@Valid NovoContatoForm novoContatoForm, BindingResult validationResult){
         if (validationResult.hasErrors()){
-            return "formNovoContato";
+            return "contato/formNovoContato";
         }
-        service.cadastrar(novoContatoRequest);
-        return "redirect:/contatos";
+        service.cadastrar(novoContatoForm);
+        return "redirect:/contatos/cadastrado";
     }
 
     @GetMapping("/editar/{id}")
     public ModelAndView editar(@PathVariable Long id){
         var contato = service.buscarPorId(id);
-        return new ModelAndView("formEditarContato")
-                .addObject("editarContatoRequest", contato.toEditarContatoRequest());
+        return new ModelAndView("contato/formEditarContato")
+                .addObject("editarContatoForm", contato.toEditarContatoForm());
     }
 
     @PostMapping("/atualizar")
-    public String atualizar(@Valid EditarContatoRequest editarContatoRequest, BindingResult validationResult){
+    public String atualizar(@Valid EditarContatoForm editarContatoForm, BindingResult validationResult){
         if (validationResult.hasErrors()){
-            return "formEditarContato";
+            return "contato/formEditarContato";
         }
-        var contato = service.buscarPorId(editarContatoRequest.id());
-        contato.atualizarDados(editarContatoRequest);
-        return "redirect:/contatos";
+        service.atualizar(editarContatoForm);
+        return "redirect:/contatos/atualizado";
     }
 
     @PostMapping("/excluir/{id}")
     public String excluir(@PathVariable Long id){
         service.excluirPorId(id);
-        return "redirect:/contatos";
+        return "redirect:/contatos/excluido";
     }
 
 }

@@ -1,15 +1,18 @@
 package br.com.nicoservices.contatospersistence.service;
 
-import br.com.nicoservices.contatospersistence.dto.NovoContatoRequest;
+import br.com.nicoservices.contatospersistence.dto.EditarContatoForm;
+import br.com.nicoservices.contatospersistence.dto.NovoContatoForm;
 import br.com.nicoservices.contatospersistence.exception.ApplicationException;
 import br.com.nicoservices.contatospersistence.model.Contato;
 import br.com.nicoservices.contatospersistence.repository.ContatoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 import static java.util.Collections.sort;
 
+@Service
 public class ContatoService {
 
     @Autowired
@@ -21,8 +24,14 @@ public class ContatoService {
         return contatos;
     }
 
-    public void cadastrar(NovoContatoRequest novoContatoRequest) {
+    public void cadastrar(NovoContatoForm novoContatoRequest) {
         repository.save(new Contato(novoContatoRequest));
+    }
+
+    public void atualizar(EditarContatoForm editarContatoForm){
+        var contato = buscarPorId(editarContatoForm.id());
+        contato.atualizarDados(editarContatoForm);
+        repository.save(contato);
     }
 
     public Contato buscarPorId(Long id) {

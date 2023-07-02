@@ -1,9 +1,10 @@
 package br.com.nicoservices.contatospersistence.model;
 
 
-import br.com.nicoservices.contatospersistence.dto.EditarContatoRequest;
-import br.com.nicoservices.contatospersistence.dto.NovoContatoRequest;
+import br.com.nicoservices.contatospersistence.dto.EditarContatoForm;
+import br.com.nicoservices.contatospersistence.dto.NovoContatoForm;
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "contatos")
 @NoArgsConstructor
+@Getter
 public class Contato implements Comparable<Contato> {
 
     @Id
@@ -25,7 +27,7 @@ public class Contato implements Comparable<Contato> {
     private String grauParentesco;
 
 
-    public Contato(NovoContatoRequest dadosNovoContato) {
+    public Contato(NovoContatoForm dadosNovoContato) {
         this.nome = dadosNovoContato.nome();
         this.sobrenome = dadosNovoContato.sobrenome();
         this.dataNascimento = dadosNovoContato.dataNascimento();
@@ -34,7 +36,7 @@ public class Contato implements Comparable<Contato> {
     }
 
 
-    public void atualizarDados(EditarContatoRequest dadosContatoAtualizados) {
+    public void atualizarDados(EditarContatoForm dadosContatoAtualizados) {
         this.nome = dadosContatoAtualizados.nome();
         this.sobrenome = dadosContatoAtualizados.sobrenome();
         this.dataNascimento = dadosContatoAtualizados.dataNascimento();
@@ -42,8 +44,8 @@ public class Contato implements Comparable<Contato> {
         this.grauParentesco = dadosContatoAtualizados.grauParentesco();
     }
 
-    public EditarContatoRequest toEditarContatoRequest() {
-        return new EditarContatoRequest(
+    public EditarContatoForm toEditarContatoForm() {
+        return new EditarContatoForm(
                 this.id,
                 this.nome,
                 this.sobrenome,
