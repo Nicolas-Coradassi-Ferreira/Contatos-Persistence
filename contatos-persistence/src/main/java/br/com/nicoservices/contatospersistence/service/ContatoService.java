@@ -1,9 +1,9 @@
 package br.com.nicoservices.contatospersistence.service;
 
-import br.com.nicoservices.contatospersistence.dto.EditarContatoForm;
-import br.com.nicoservices.contatospersistence.dto.NovoContatoForm;
+import br.com.nicoservices.contatospersistence.dto.contato.EditarContatoForm;
+import br.com.nicoservices.contatospersistence.dto.contato.NovoContatoForm;
 import br.com.nicoservices.contatospersistence.exception.ApplicationException;
-import br.com.nicoservices.contatospersistence.model.Contato;
+import br.com.nicoservices.contatospersistence.model.contato.Contato;
 import br.com.nicoservices.contatospersistence.repository.ContatoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

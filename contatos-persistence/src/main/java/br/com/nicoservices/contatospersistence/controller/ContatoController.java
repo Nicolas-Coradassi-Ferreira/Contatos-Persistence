@@ -1,8 +1,8 @@
 package br.com.nicoservices.contatospersistence.controller;
 
 
-import br.com.nicoservices.contatospersistence.dto.EditarContatoForm;
-import br.com.nicoservices.contatospersistence.dto.NovoContatoForm;
+import br.com.nicoservices.contatospersistence.dto.contato.EditarContatoForm;
+import br.com.nicoservices.contatospersistence.dto.contato.NovoContatoForm;
 import br.com.nicoservices.contatospersistence.service.ContatoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

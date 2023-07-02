@@ -1,8 +1,8 @@
-package br.com.nicoservices.contatospersistence.model;
+package br.com.nicoservices.contatospersistence.model.contato;
 
 
-import br.com.nicoservices.contatospersistence.dto.EditarContatoForm;
-import br.com.nicoservices.contatospersistence.dto.NovoContatoForm;
+import br.com.nicoservices.contatospersistence.dto.contato.EditarContatoForm;
+import br.com.nicoservices.contatospersistence.dto.contato.NovoContatoForm;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

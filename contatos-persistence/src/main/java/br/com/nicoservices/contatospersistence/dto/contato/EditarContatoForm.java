@@ -1,4 +1,4 @@
-package br.com.nicoservices.contatospersistence.dto;
+package br.com.nicoservices.contatospersistence.dto.contato;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
