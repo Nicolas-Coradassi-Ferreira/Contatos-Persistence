@@ -1,17 +1,17 @@
 
 
 function mostrarTelefones(idContato) {
-    var divContato = document.getElementById(idContato);
-    var inputTelefonesContato = divContato.querySelector("#telefonesContato" + idContato);
-    var telefonesContato = inputTelefonesContato.value.split(";");
+    let divContato = document.getElementById(idContato);
+    let inputTelefonesContato = divContato.querySelector("#telefonesContato" + idContato);
+    let telefonesContato = inputTelefonesContato.value.split(";");
 
-    var ulTelefones = divContato.querySelector("#telefones" + idContato);
+    let ulTelefones = divContato.querySelector("#telefones" + idContato);
     ulTelefones.classList.add("card");
     ulTelefones.innerHTML = '';
 
     telefonesContato.forEach((telefone) => {
 
-        var novoItemUlTelefones = document.createElement("li");
+        let novoItemUlTelefones = document.createElement("li");
         novoItemUlTelefones.textContent = telefone;
         novoItemUlTelefones.style.margin = '3px';
         ulTelefones.appendChild(novoItemUlTelefones);
@@ -20,29 +20,29 @@ function mostrarTelefones(idContato) {
 
 function adicionarTelefone() {
 
-    var regexTelefone = /^(\d{9}|\d{12}|\d{14})$/;
+    let regexTelefone = /^(\d{9}|\d{12}|\d{14})$/;
 
-    var inputTelefone = document.getElementById('telefone');
-    var telefone = inputTelefone.value;
-    var formGroupTelefone = inputTelefone.parentElement.parentElement;
+    let inputTelefone = document.getElementById('telefone');
+    let telefone = inputTelefone.value;
+    let formGroupTelefone = inputTelefone.parentElement.parentElement;
 
     if (telefone.match(regexTelefone)) {
 
-        var ulTelefones = document.getElementById('telefones');
+        let ulTelefones = document.getElementById('telefones');
         ulTelefones.classList.add("card", "mt-3");
 
-        var telefoneFormatado = formatarTelefone(telefone);
+        let telefoneFormatado = formatarTelefone(telefone);
 
-        var novoItemUlTelefones = document.createElement("li");
+        let novoItemUlTelefones = document.createElement("li");
         novoItemUlTelefones.textContent = telefoneFormatado;
         novoItemUlTelefones.style.margin = '3px';
 
-        var botaoRemoverTelefone = document.createElement("button");
+        let botaoRemoverTelefone = document.createElement("button");
         botaoRemoverTelefone.classList.add("btn", "btn-danger");
         botaoRemoverTelefone.textContent = "-";
         botaoRemoverTelefone.style.marginLeft = '10px';
         botaoRemoverTelefone.addEventListener("click", function () {
-            var liTelefone = botaoRemoverTelefone.parentElement;
+            let liTelefone = botaoRemoverTelefone.parentElement;
             liTelefone.remove();
         });
         novoItemUlTelefones.appendChild(botaoRemoverTelefone);
@@ -51,7 +51,7 @@ function adicionarTelefone() {
 
         inputTelefone.value = "";
 
-        var divErro = formGroupTelefone.querySelector("#divErro");
+        let divErro = formGroupTelefone.querySelector("#divErro");
         if (divErro) {
             inputTelefone.classList.remove("is-invalid");
             divErro.remove();
@@ -60,7 +60,7 @@ function adicionarTelefone() {
     } else {
         inputTelefone.classList.add("is-invalid");
 
-        var divErro = formGroupTelefone.querySelector("#divErro");
+        let divErro = formGroupTelefone.querySelector("#divErro");
         if (!divErro) {
             divErro = document.createElement("div");
             divErro.setAttribute("id", "divErro");
@@ -74,7 +74,7 @@ function adicionarTelefone() {
 }
 
 function onSubmitFormContato() {
-    var ulTelefones = document.getElementById("telefones");
+    let ulTelefones = document.getElementById("telefones");
 
     if (ulTelefones.childElementCount == 0) {
         alert("Informe pelo menos 1 telefone para cadastrar ou atualizar o contato!");
@@ -83,38 +83,38 @@ function onSubmitFormContato() {
     }
 
     itensUlTelefones = ulTelefones.getElementsByTagName("li");
-    var telefones = [];
+    let telefones = [];
 
-    for (var i = 0; i < itensUlTelefones.length; i++) {
-        var telefone = itensUlTelefones[i].textContent;
+    for (let i = 0; i < itensUlTelefones.length; i++) {
+        let telefone = itensUlTelefones[i].textContent;
         telefones.push(telefone.slice(0, telefone.length - 1));
     }
 
-    var inputTelefonesContato = document.getElementById("telefonesContato");
+    let inputTelefonesContato = document.getElementById("telefonesContato");
     inputTelefonesContato.value = telefones.join(";");
 
     return true;
 }
 
 function whenDocumentLoaded() {
-    var inputTelefonesContato = document.getElementById("telefonesContato");
-    var telefonesContato = inputTelefonesContato.value.split(";");
+    let inputTelefonesContato = document.getElementById("telefonesContato");
+    let telefonesContato = inputTelefonesContato.value.split(";");
 
     if (telefonesContato[0] != '') {
-        var ulTelefones = document.getElementById("telefones");
+        let ulTelefones = document.getElementById("telefones");
         ulTelefones.classList.add("card", "mt-3");
         telefonesContato.forEach((telefone) => {
 
-            var novoItemUlTelefones = document.createElement("li");
+            let novoItemUlTelefones = document.createElement("li");
             novoItemUlTelefones.textContent = telefone;
             novoItemUlTelefones.style.margin = '3px';
 
-            var botaoRemoverTelefone = document.createElement("button");
+            let botaoRemoverTelefone = document.createElement("button");
             botaoRemoverTelefone.classList.add("btn", "btn-danger");
             botaoRemoverTelefone.textContent = "-";
             botaoRemoverTelefone.style.marginLeft = '10px';
             botaoRemoverTelefone.addEventListener("click", function () {
-                var liTelefone = botaoRemoverTelefone.parentElement;
+                let liTelefone = botaoRemoverTelefone.parentElement;
                 liTelefone.remove();
             });
             novoItemUlTelefones.appendChild(botaoRemoverTelefone);
@@ -143,7 +143,7 @@ function formatarTelefone(telefone) {
 }
 
 function inserirDataNascimentoForm() {
-    var fieldDataNascimento = document.getElementById("dataNascimento");
-    var dataNascimentoFormatoCorreto = document.getElementById("dataNascimentoFormatoCorreto").value;
+    let fieldDataNascimento = document.getElementById("dataNascimento");
+    let dataNascimentoFormatoCorreto = document.getElementById("dataNascimentoFormatoCorreto").value;
     fieldDataNascimento.value = dataNascimentoFormatoCorreto;
 }

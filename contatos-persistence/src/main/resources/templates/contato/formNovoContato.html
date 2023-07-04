@@ -22,13 +22,13 @@
 
         <nav class="navbar bg-body-secondary mb-3">
             <div class="container-fluid justify-content-between">
-                <a class="navbar-nav nav-link" href="/contatos/consultar">Meus Contatos</a>
-                <a href="/contatos/novo"><button class="btn btn-primary">Novo</button></a>
+                <a class="navbar-nav nav-link" th:href="@{/contatos/consultar}">Meus Contatos</a>
+                <a th:href="@{/contatos/novo}"><button class="btn btn-primary">Novo</button></a>
             </div>
         </nav>
 
         <form th:object="${novoContatoForm}" class="card card-body"
-            th:action="'/contatos/cadastrar'" method="post" onsubmit="return onSubmitFormContato()">
+            th:action="@{/contatos/cadastrar}" method="post" onsubmit="return onSubmitFormContato()">
 
             <div class="card-header">
                 Novo Contato

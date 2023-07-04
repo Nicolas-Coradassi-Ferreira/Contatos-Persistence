@@ -16,15 +16,12 @@
             <h1 class="display-5">Contatos Persistence</h1>
         </header>
 
-        <div th:if="${exception}">
-            <div class="alert alert-danger" role="alert" th:text="${message}"></div>
-        </div>
-
         <form class="card" th:action="@{/login}" method="post">
 
             <div class="card-header">
                 Login
             </div>
+            
             <div class="card-body">
 
                 <div class="form-group">
