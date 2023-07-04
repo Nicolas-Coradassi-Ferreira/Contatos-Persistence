@@ -12,7 +12,15 @@
 <body>
     <div class="container">
 
-        <form class="card mt-5" th:action="@{/login}" method="post">
+        <header class="bg-body-secondary p-3 mb-3">
+            <h1 class="display-5">Contatos Persistence</h1>
+        </header>
+
+        <div th:if="${exception}">
+            <div class="alert alert-danger" role="alert" th:text="${message}"></div>
+        </div>
+
+        <form class="card" th:action="@{/login}" method="post">
 
             <div class="card-header">
                 Login
@@ -31,6 +39,7 @@
 
                 <div class="form-group d-flex flex-column">
                     <button class="btn btn-primary mt-3" type="submit">Logar</button>
+
                     <p>Não possui uma conta? <a href="/registrar">Registre-se</a></p>
                 </div>
             </div>
