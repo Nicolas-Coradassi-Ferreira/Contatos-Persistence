@@ -15,32 +15,33 @@ import org.springframework.stereotype.Service;
 public class UsuarioService implements UserDetailsService {
 
     @Autowired
-    private UsuarioRepository repository;
+    private UsuarioRepository usuarioRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return repository
+        return usuarioRepository
                 .findByUsername(username)
-                .orElseThrow(() ->
-                        new UsernameNotFoundException(
-                                String.format("Usuário %s não encontrado!", username))
-                );
+                .orElseThrow(() -> new UsernameNotFoundException(
+                        String.format("Usuário %s não encontrado!", username)
+                ));
     }
 
     public void cadastrar(NovoUsuarioForm novoUsuarioForm) {
-        var usuario = repository.findByUsername(novoUsuarioForm.username());
+        var usuario = usuarioRepository.findByUsername(novoUsuarioForm.username());
         if (usuario.isPresent()) {
             throw new UsuarioJaCadastradoException(String.format("Usuario %s já cadastrado!", novoUsuarioForm.username()));
         }
-        repository.save(
-                new Usuario(
-                        novoUsuarioForm.nomeCompleto(),
-                        novoUsuarioForm.username(),
-                        passwordEncoder.encode(novoUsuarioForm.password())
-                )
-        );
+        usuarioRepository.save(new Usuario(
+                novoUsuarioForm.nomeCompleto(),
+                novoUsuarioForm.username(),
+                passwordEncoder.encode(novoUsuarioForm.password())
+        ));
+    }
+
+    public void atualizar(Usuario u){
+        usuarioRepository.saveAndFlush(u);
     }
 }

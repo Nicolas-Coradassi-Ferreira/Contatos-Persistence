@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+import static java.util.Collections.unmodifiableList;
+
 
 @Entity
 @Table(
@@ -35,6 +37,14 @@ public class Usuario implements UserDetails {
         this.password = password;
     }
 
+
+    public void adicionarContato(Contato c){
+        this.contatos.add(c);
+    }
+
+    public List<Contato> getContatos(){
+        return unmodifiableList(this.contatos);
+    }
 
     @Override
     public String getUsername() {
