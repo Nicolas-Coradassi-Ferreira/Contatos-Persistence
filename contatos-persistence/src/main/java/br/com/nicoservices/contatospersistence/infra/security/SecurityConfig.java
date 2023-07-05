@@ -17,7 +17,7 @@ public class SecurityConfig {
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(authorizeConfig -> {
-                    authorizeConfig.requestMatchers("/", "/login", "/registrar", "/script/**").permitAll();
+                    authorizeConfig.requestMatchers("/login", "/registrar", "/script/**").permitAll();
                     authorizeConfig.anyRequest().authenticated();
                 })
                 .formLogin(loginConfig -> {

@@ -1,5 +1,6 @@
 package br.com.nicoservices.contatospersistence.model.usuario;
 
+import br.com.nicoservices.contatospersistence.exception.ContatoNaoEncontradoException;
 import br.com.nicoservices.contatospersistence.model.contato.Contato;
 
 import jakarta.persistence.Entity;
@@ -55,6 +56,14 @@ public class Usuario implements UserDetails {
 
     public void removerContatoPorId(Long id){
         this.contatos.removeIf(contato -> Objects.equals(contato.getId(), id));
+    }
+
+    public Contato getContatoPorId(Long id){
+        return this.contatos
+                .stream()
+                .filter(contato -> Objects.equals(contato.getId(), id))
+                .findFirst()
+                .orElseThrow(() -> new ContatoNaoEncontradoException("Não foi possível encontrar o contato!"));
     }
 
     public List<Contato> getContatos(){

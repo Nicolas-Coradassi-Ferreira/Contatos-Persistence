@@ -50,24 +50,26 @@ public class ContatoController {
     }
 
     @GetMapping("/editar/{id}")
-    public ModelAndView editar(@PathVariable Long id){
-        var contato = contatoService.buscarPorId(id);
+    public ModelAndView editar(@PathVariable("id") Long contatoId, Principal usuario){
+        var contato = contatoService.buscarPorId(usuario.getName(), contatoId);
         return new ModelAndView("contato/formEditarContato")
                 .addObject("editarContatoForm", contato.toEditarContatoForm());
     }
 
     @PostMapping("/atualizar")
-    public String atualizar(@Valid EditarContatoForm editarContatoForm, BindingResult validationResult){
+    public String atualizar(@Valid EditarContatoForm editarContatoForm,
+                            BindingResult validationResult,
+                            Principal usuario){
         if (validationResult.hasErrors()){
             return "contato/formEditarContato";
         }
-        contatoService.atualizar(editarContatoForm);
+        contatoService.atualizar(usuario.getName(), editarContatoForm);
         return "redirect:/contatos/atualizado";
     }
 
     @PostMapping("/excluir/{id}")
-    public String excluir(@PathVariable Long id, Principal usuario){
-        contatoService.excluirPorId(usuario.getName(), id);
+    public String excluir(@PathVariable("id") Long contatoId, Principal usuario){
+        contatoService.excluirPorId(usuario.getName(), contatoId);
         return "redirect:/contatos/excluido";
     }
 
