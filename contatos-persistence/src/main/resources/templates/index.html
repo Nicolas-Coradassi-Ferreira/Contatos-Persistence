@@ -58,7 +58,7 @@
                             <a th:href="@{'/contatos/editar/' + ${contato.id}}">
                                 <button class="btn btn-secondary me-1">Editar</button>
                             </a>
-                            <form th:action="@{'/contatos/excluir/' + ${contato.id}}" method="post">
+                            <form th:action="@{'/contatos/excluir/' + ${contato.id}}" method="post" onsubmit="return onSubmitExcluirContato()">
                                 <button class="btn btn-danger" type="submit">Excluir</button>
                             </form>
                         </div>

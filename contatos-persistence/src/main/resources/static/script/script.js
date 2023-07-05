@@ -96,6 +96,13 @@ function onSubmitFormContato() {
     return true;
 }
 
+function onSubmitExcluirContato(){
+    if (confirm("Tem certeza que deseja excluir este contato?")){
+        return true;
+    }
+    return false;
+}
+
 function whenDocumentLoaded() {
     let inputTelefonesContato = document.getElementById("telefonesContato");
     let telefonesContato = inputTelefonesContato.value.split(";");
