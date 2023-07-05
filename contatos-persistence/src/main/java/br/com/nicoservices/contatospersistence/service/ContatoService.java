@@ -38,13 +38,13 @@ public class ContatoService {
     public void atualizar(EditarContatoForm editarContatoForm){
         var contato = buscarPorId(editarContatoForm.id());
         contato.atualizarDados(editarContatoForm);
-        contatoRepository.save(contato);
+        contatoRepository.saveAndFlush(contato);
     }
 
     public Contato buscarPorId(Long id) {
         return contatoRepository
                 .findById(id)
-                .orElseThrow(() -> new ContatoNaoEncontradoException("Não foi possível encontrar o contato específicado!"));
+                .orElseThrow(() -> new ContatoNaoEncontradoException("Não foi possível encontrar o contato no banco de dados! :("));
     }
 
     public void excluirPorId(String username, Long id) {
