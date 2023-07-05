@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -26,8 +27,14 @@ public class AutenticacaoController {
 
 
     @GetMapping("/login")
-    public String login() {
-        return "usuario/formLogin";
+    public ModelAndView login(HttpServletRequest request) {
+        String urlParam = request.getQueryString();
+        if (urlParam != null && urlParam.equals("error")){
+            return new ModelAndView("usuario/formLogin")
+                    .addObject("error", true)
+                    .addObject("message", "Nome de usuário ou senha inválidos!");
+        }
+        return new ModelAndView("usuario/formLogin");
     }
 
     @GetMapping("/registrar")
