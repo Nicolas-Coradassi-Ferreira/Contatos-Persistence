@@ -8,6 +8,7 @@ import br.com.nicoservices.contatospersistence.model.usuario.Usuario;
 import br.com.nicoservices.contatospersistence.repository.ContatoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,7 @@ public class ContatoService {
         usuarioService.atualizar(usuario);
     }
 
+    @Transactional
     public void atualizar(EditarContatoForm editarContatoForm){
         var contato = buscarPorId(editarContatoForm.id());
         contato.atualizarDados(editarContatoForm);

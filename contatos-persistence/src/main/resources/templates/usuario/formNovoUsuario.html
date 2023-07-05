@@ -47,13 +47,6 @@
                     <div class="invalid-feedback" th:error="*{password}">8 ou mais dígitos alfanuméricos (sem caracteres especiais)!</div>
                 </div>
 
-                <div class="form-group">
-                    <label for="password" class="mb-1">Senha:</label>
-                    <input type="password" th:field="*{password}" th:errorclass="is-invalid" class="form-control"
-                           placeholder="Digite sua senha...">
-                    <div class="invalid-feedback" th:error="*{password}">8 ou mais dígitos alfanuméricos (sem caracteres especiais)!</div>
-                </div>
-
                 <div class="form-group d-flex flex-column">
                     <button class="btn btn-primary mt-3" type="submit">Registrar-se</button>
                     <p>Já possui uma conta? Faça <a href="/login">Login</a></p>

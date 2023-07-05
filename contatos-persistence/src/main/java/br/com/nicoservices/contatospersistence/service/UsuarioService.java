@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UsuarioService implements UserDetailsService {
@@ -29,6 +30,7 @@ public class UsuarioService implements UserDetailsService {
                 ));
     }
 
+    @Transactional
     public void cadastrar(NovoUsuarioForm novoUsuarioForm) {
         var usuario = usuarioRepository.findByUsername(novoUsuarioForm.username());
         if (usuario.isPresent()) {
@@ -41,6 +43,7 @@ public class UsuarioService implements UserDetailsService {
         ));
     }
 
+    @Transactional
     public void atualizar(Usuario u){
         usuarioRepository.saveAndFlush(u);
     }
