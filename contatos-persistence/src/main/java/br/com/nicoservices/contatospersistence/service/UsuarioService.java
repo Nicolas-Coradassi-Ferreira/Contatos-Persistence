@@ -34,7 +34,7 @@ public class UsuarioService implements UserDetailsService {
     public void cadastrar(NovoUsuarioForm novoUsuarioForm) {
         var usuario = usuarioRepository.findByUsername(novoUsuarioForm.username());
         if (usuario.isPresent()) {
-            throw new UsuarioJaCadastradoException(String.format("Usuario %s já cadastrado!", novoUsuarioForm.username()));
+            throw new UsuarioJaCadastradoException(String.format("Usuario '%s' já cadastrado!", novoUsuarioForm.username()));
         }
         usuarioRepository.save(new Usuario(
                 novoUsuarioForm.nomeCompleto(),
