@@ -49,26 +49,26 @@ public class ContatoController {
         return "redirect:/contatos/cadastrado";
     }
 
-//    @GetMapping("/editar/{id}")
-//    public ModelAndView editar(@PathVariable Long id){
-//        var contato = contatoService.buscarPorId(id);
-//        return new ModelAndView("contato/formEditarContato")
-//                .addObject("editarContatoForm", contato.toEditarContatoForm());
-//    }
+    @GetMapping("/editar/{id}")
+    public ModelAndView editar(@PathVariable Long id){
+        var contato = contatoService.buscarPorId(id);
+        return new ModelAndView("contato/formEditarContato")
+                .addObject("editarContatoForm", contato.toEditarContatoForm());
+    }
 
-//    @PostMapping("/atualizar")
-//    public String atualizar(@Valid EditarContatoForm editarContatoForm, BindingResult validationResult){
-//        if (validationResult.hasErrors()){
-//            return "contato/formEditarContato";
-//        }
-//        contatoService.atualizar(editarContatoForm);
-//        return "redirect:/contatos/atualizado";
-//    }
+    @PostMapping("/atualizar")
+    public String atualizar(@Valid EditarContatoForm editarContatoForm, BindingResult validationResult){
+        if (validationResult.hasErrors()){
+            return "contato/formEditarContato";
+        }
+        contatoService.atualizar(editarContatoForm);
+        return "redirect:/contatos/atualizado";
+    }
 
-//    @PostMapping("/excluir/{id}")
-//    public String excluir(@PathVariable Long id){
-//        contatoService.excluirPorId(id);
-//        return "redirect:/contatos/excluido";
-//    }
+    @PostMapping("/excluir/{id}")
+    public String excluir(@PathVariable Long id, Principal usuario){
+        contatoService.excluirPorId(usuario.getName(), id);
+        return "redirect:/contatos/excluido";
+    }
 
 }

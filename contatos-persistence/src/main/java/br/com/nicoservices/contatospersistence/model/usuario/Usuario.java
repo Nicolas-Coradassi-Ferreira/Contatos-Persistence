@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import static java.util.Collections.unmodifiableList;
 
@@ -40,6 +41,10 @@ public class Usuario implements UserDetails {
 
     public void adicionarContato(Contato c){
         this.contatos.add(c);
+    }
+
+    public void removerContatoPorId(Long id){
+        this.contatos.removeIf(contato -> Objects.equals(contato.getId(), id));
     }
 
     public List<Contato> getContatos(){
