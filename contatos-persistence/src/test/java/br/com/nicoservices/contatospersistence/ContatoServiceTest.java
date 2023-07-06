@@ -147,7 +147,7 @@ public class ContatoServiceTest {
     }
 
     @Test
-    void deveriaLancarExcecaoAoTentarBuscarUmContatoDaListaDeContatosDoUsuarioComIdInexistente(){
+    void deveriaLancarExcecaoAoTentarBuscarUmContatoNaListaDeContatosDoUsuarioComIdInexistente(){
         assertThrows(ContatoNaoEncontradoException.class, () -> {
             contatoService.buscarPorId("nomeUsuario", 70L);
         });
