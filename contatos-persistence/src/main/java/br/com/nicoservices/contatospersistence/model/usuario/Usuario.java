@@ -13,6 +13,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.CascadeType;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,6 +32,8 @@ import static java.util.Collections.unmodifiableList;
         uniqueConstraints = @UniqueConstraint(columnNames = "username")
 )
 @NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class Usuario implements UserDetails {
 
     @Id
@@ -39,7 +43,7 @@ public class Usuario implements UserDetails {
     private String nomeCompleto;
     private String username;
     private String password;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Contato> contatos;
 
 
@@ -68,6 +72,10 @@ public class Usuario implements UserDetails {
 
     public List<Contato> getContatos(){
         return unmodifiableList(this.contatos);
+    }
+
+    public String getNomeCompleto() {
+        return nomeCompleto;
     }
 
     @Override

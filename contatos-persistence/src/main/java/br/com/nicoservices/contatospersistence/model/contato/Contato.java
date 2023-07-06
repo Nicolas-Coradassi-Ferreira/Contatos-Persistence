@@ -9,6 +9,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -17,7 +19,9 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "contatos")
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
+@EqualsAndHashCode(of = "id")
 public class Contato implements Comparable<Contato> {
 
     @Id
