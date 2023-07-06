@@ -10,6 +10,7 @@ public record NovoUsuarioForm(
         String nomeCompleto,
         @NotNull
         @NotBlank
+        @Pattern(regexp = "^\\S*$")
         String username,
         @NotNull
         @NotBlank
