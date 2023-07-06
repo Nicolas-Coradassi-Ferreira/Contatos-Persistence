@@ -103,6 +103,23 @@ function onSubmitExcluirContato(){
     return false;
 }
 
+function onSubmitFormNovoUsuario(){
+    let inputSenha = document.getElementById("inputSenha");
+    let inputSenhaConfirmada = document.getElementById("inputSenhaConfirmada");
+
+    if (inputSenha.value == inputSenhaConfirmada.value){
+        return true;
+    }
+
+    inputSenha.classList.add("is-invalid");
+    inputSenhaConfirmada.classList.add("is-invalid");
+    let divErro = document.getElementById("divErro");
+    if (divErro) {
+        divErro.remove();
+    }
+    return false;
+}
+
 function whenDocumentLoaded() {
     let inputTelefonesContato = document.getElementById("telefonesContato");
     let telefonesContato = inputTelefonesContato.value.split(";");
